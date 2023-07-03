@@ -8,7 +8,11 @@
      Title="Login" Height="350" Width="550" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
     <Border Background="White" CornerRadius="20">
         <Grid Margin="10,10,10,10">
-            <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="13*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" Margin="0,0,0.4,0" />
             <Button x:Name="login_btn" Content="Войти" HorizontalAlignment="Left" Margin="228,257,0,0" VerticalAlignment="Top" Height="29" Width="102" Background="White" Click="login_btn_Click">
                 <Button.Resources>
                     <Style TargetType="Border">

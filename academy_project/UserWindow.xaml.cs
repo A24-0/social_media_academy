@@ -22,15 +22,14 @@ namespace academy_project
         public UserWindow()
         {
             InitializeComponent();
+            CheckedUser checkedUser = new CheckedUser();
+            lb_username.Content = checkedUser.Username;
+            lb_email.Content = checkedUser.Email;
         }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-        private void Window_Closing(object sender, RoutedEventArgs e)
-        {
-            App.Current.Shutdown();
+
         }
     }
 }

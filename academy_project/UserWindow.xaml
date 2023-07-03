@@ -5,10 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:academy_project"
         mc:Ignorable="d"
-    Title="UserWindow" Height="350" Width="550" ResizeMode="CanResizeWithGrip" MinHeight="250" MinWidth="450" WindowStyle="None" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
-    <Border Background="White" CornerRadius="20">
-        <Grid Margin="10,10,10,10">
-            <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" />
-        </Grid>
-    </Border>
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,-0.4,-8">
+
+        <Button Content="Сменить пароль" Click="ChangePassword_Click" Width="100" Height="30" Margin="655,388,39,10"/>
+        <Label Content="Login:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="129"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="129"/>
+        <Label Content="Друзья:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="129"/>
+        <Button Content="Сменить Email" Click="ChangePassword_Click" Width="100" Height="30" Margin="543,388,151,10"/>
+        <Label x:Name="lb_username" Content="Label" HorizontalAlignment="Left" Margin="101,5,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lb_email" Content="Label" HorizontalAlignment="Left" Margin="101,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lb_friends" Content="Label" HorizontalAlignment="Left" Margin="101,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="найти друга" HorizontalAlignment="Left" Margin="543,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_search" HorizontalAlignment="Left" Margin="635,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="lbox_users" HorizontalAlignment="Left" Height="322" Margin="543,41,0,0" VerticalAlignment="Top" Width="212"/>
+
+    </Grid>
 </Window>
