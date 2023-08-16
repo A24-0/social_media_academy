@@ -5,107 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:academy_project"
         mc:Ignorable="d"
-        Title="UserWindow_Main" Height="450" Width="800">
-    <!-- Определение стилей -->
-    <Window.Resources>
-        <Style x:Key="HeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Margin" Value="10" />
-        </Style>
-
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF2ECC71" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="Width" Value="120" />
-            <Setter Property="Height" Value="40" />
-        </Style>
-
-        <Style x:Key="ListBoxStyle" TargetType="ListBox">
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="Background" Value="WhiteSmoke" />
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
-
-        <Style x:Key="TextBoxStyle" TargetType="TextBox">
-            <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Margin" Value="0,0,10,0" />
-        </Style>
-    </Window.Resources>
-
+        Title="User Main Window" Height="600" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <!-- Верхняя панель с информацией пользователя -->
-        <Grid Background="#FF1C2833">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <!-- Фото пользователя -->
-            <Ellipse Width="80" Height="80" Margin="10" Fill="Gray" />
-
-            <!-- Логин пользователя -->
-            <TextBlock Text="Логин пользователя" Style="{StaticResource HeaderStyle}"
-                       Grid.Column="1" VerticalAlignment="Center" />
-
-            <!-- Email пользователя -->
-            <TextBlock Text="example@example.com" Style="{StaticResource HeaderStyle}"
-                       Grid.Column="2" VerticalAlignment="Center" />
-
-            <!-- Кнопка добавления друга -->
-            <Button Content="Добавить друга" Style="{StaticResource ButtonStyle}"
-                    Grid.Column="3" VerticalAlignment="Center" />
-        </Grid>
-
-        <!-- Основная область с контентом -->
-        <Grid Grid.Row="1" Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <!-- Список друзей -->
-            <ListBox Style="{StaticResource ListBoxStyle}" Grid.Row="0">
-                <ListBoxItem>Друг 1</ListBoxItem>
-                <ListBoxItem>Друг 2</ListBoxItem>
-                <ListBoxItem>Друг 3</ListBoxItem>
-                <ListBoxItem>Друг 4</ListBoxItem>
-                <!-- Добавьте здесь другие элементы списка друзей -->
-            </ListBox>
-
-            <!-- Область для отображения выбранного друга и отправки сообщений -->
-            <StackPanel Grid.Row="1" Margin="10">
-                <!-- Отображение выбранного друга -->
-                <TextBlock Text="Выбранный друг:" Style="{StaticResource HeaderStyle}"
-                           FontWeight="Bold" Margin="0,0,0,5" />
-                <TextBlock Text="Нет выбранного друга" FontStyle="Italic" />
-
-                <!-- Область для отправки сообщений -->
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBox Style="{StaticResource TextBoxStyle}" />
-                    <Button Content="Отправить" Style="{StaticResource ButtonStyle}" />
-                </StackPanel>
+        <Border CornerRadius="20" Background="#F0F0F0" Width="250" HorizontalAlignment="Left" Margin="20, 10, 10, 10">
+            <StackPanel>
+                <Border CornerRadius="50" Background="Green" Height="100" Width="100" HorizontalAlignment="Center">
+                    <!-- аватарка -->
+                </Border>
+                <TextBlock Text="Username" HorizontalAlignment="Center" Margin="0,10" FontSize="16"/>
+                <Button x:Name="find_friend_btn" Content="Найти друга" Margin="0,80,0,0" Background="#F0F0F0" BorderThickness="0" FontSize="24"/>
+                <Button x:Name="chats_btn" Content="Чаты"  Margin="0,30,0,0" Background="#F0F0F0" BorderThickness="0" FontSize="24"/>
+                <Button x:Name="profile_settings_btn" Content="Настройки профиля" Margin="0,30,0,0" Background="#F0F0F0" BorderThickness="0" FontSize="24"/>
             </StackPanel>
+        </Border>
 
-            <!-- Область для отображения сообщений -->
-            <ScrollViewer Grid.Row="2" Margin="10" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <TextBlock Text="Сообщение 1" Margin="0,0,0,5" />
-                    <TextBlock Text="Сообщение 2" Margin="0,0,0,5" />
-                    <TextBlock Text="Сообщение 3" Margin="0,0,0,5" />
-                    <!-- Добавьте здесь другие элементы сообщений -->
+        <Border CornerRadius="20" Background="White" Width="490" HorizontalAlignment="Right" Margin="20">
+            <ContentControl x:Name="contentArea">
+                <StackPanel x:Name="friendSearchPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" Visibility="Collapsed">
+                    <TextBox x:Name="friendNameTextBox" Width="150" Margin="10"/>
+                    <Button x:Name="findFriendButton" Content="Найти" Margin="5" Click="FindFriendButton_Click"/>
                 </StackPanel>
-            </ScrollViewer>
-        </Grid>
+            </ContentControl>
+        </Border>
     </Grid>
 </Window>

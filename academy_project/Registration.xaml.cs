@@ -1,6 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -15,16 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-
-
 namespace academy_project
 {
-    /// <summary>
-    /// Логика взаимодействия для Registration.xaml
-    /// </summary>
-    /// 
-
-   
     public partial class Registration : Window
     {
         public Registration()
@@ -92,13 +84,13 @@ namespace academy_project
             var db = new DB_PROJECTEntities();
             var user_db = new Users();
             List<Users> users = db.Users.ToList();
-            if (login_tb != null && password_tb != null && email_tb != null)
+            if (name_tb != null && password_tb != null && email_tb != null)
             {
                 foreach (var item in users)
                 {
                     user_db.Id = item.Id + 1;
                 }
-                user_db.Login = login_tb.Text;
+                user_db.Login = name_tb.Text;
                 user_db.Password = password_tb.Text;
                 user_db.Password = EncryptString(user_db.Password, user_db.Login);
                 user_db.Email = email_tb.Text;
@@ -110,7 +102,7 @@ namespace academy_project
                 this.Close();
                 loginWindow.Show();
             }
-            else 
+            else
             {
                 MessageBox.Show("Error data");
             }

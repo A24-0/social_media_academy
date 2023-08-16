@@ -5,42 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:academy_project"
         mc:Ignorable="d"
-      Title="Registration" Height="450" Width="550" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
-    <Border Background="White" CornerRadius="20">
-        <Grid Margin="10,10,10,10">
-            <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" />
-            <Button x:Name="registration_btn" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="203,354,0,0" VerticalAlignment="Top" Height="29" Width="142" Background="White" Click="registration_btn_Click">
+        Title="Registration" Height="330" Width="550" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
+    <Border Background="#EFEFEF" CornerRadius="20">
+        <Grid Margin="90, 10, 10, 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" Margin="0,0,0.4,0" />
+            <Label Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="-50,10,0,10"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+                <Label Content="Имя:" VerticalAlignment="Center" Width="70"/>
+                <TextBox x:Name="name_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+                <Label Content="Почта:" VerticalAlignment="Center" Width="70"/>
+                <TextBox x:Name="email_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10">
+                <Label Content="Пароль:" VerticalAlignment="Center" Width="70"/>
+                <TextBox x:Name="password_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
+            <Button x:Name="registration_btn" Content="Зарегистрироваться" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="160" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="-50,30,0,10" Click="registration_btn_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="18"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Label x:Name="login_lb" Content="Регистрация" HorizontalAlignment="Left" Margin="212,25,0,0" VerticalAlignment="Top" FontSize="20"/>
-            <Label x:Name="log_user" Content="Логин" HorizontalAlignment="Left" Margin="252,86,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="login_tb" HorizontalAlignment="Left" Margin="182,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" Height="31">
-                <TextBox.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="18"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <TextBox x:Name="password_tb" HorizontalAlignment="Left" Margin="181,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="31">
-                <TextBox.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="18"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Label x:Name="password_lb" Content="Пароль" HorizontalAlignment="Left" Margin="252,256,0,0" VerticalAlignment="Top" Width="56"/>
-            <Label x:Name="email_lb" Content="        Почта" HorizontalAlignment="Left" Margin="223,170,0,0" VerticalAlignment="Top" Width="102"/>
-            <TextBox x:Name="email_tb" HorizontalAlignment="Left" Margin="181,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="184" Height="31">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="18"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
         </Grid>
     </Border>
 </Window>

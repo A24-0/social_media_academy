@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\User\Desktop\social_media_academy-main\academy_project\obj\Debug\
+C:\Users\User\Desktop\social_media_academy\academy_project\obj\Debug\
 academy_project
 none
 false
 DEBUG;TRACE
-C:\Users\User\Desktop\social_media_academy-main\academy_project\App.xaml
-51159479947
+C:\Users\User\Desktop\social_media_academy\academy_project\App.xaml
+61364837295
 2-1957146511
-20-956420462
-18-57729781
-Login.xaml;MainWindow.xaml;Registration.xaml;UserWindow.xaml;UserWindow_Main.xaml;
+231335369339
+18-1537362463
+ChatContentControl.xaml;ChatListControl.xaml;Login.xaml;MainWindow.xaml;Registration.xaml;UserWindow_Main.xaml;
 
-True
+False
 

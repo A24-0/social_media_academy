@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace academy_project
 {
-    /// <summary>
-    /// Логика взаимодействия для Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
         public Login()
@@ -80,7 +77,7 @@ namespace academy_project
         }
         private void login_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (login_tb.Text != null && password_tb.Text != null) 
+            if (email_tb.Text != null && password_tb.Text != null) 
             {
                 var db = new DB_PROJECTEntities();
 
@@ -93,15 +90,15 @@ namespace academy_project
                 {
                     string tmpPassword = item.Password;
                     var NewtmpPassword = DecryptString(item.Password, item.Login);
-                    if (password_tb.Text != null && login_tb.Text != null) 
+                    if (password_tb.Text != null && email_tb.Text != null) 
                     {
-                        if (NewtmpPassword == password_tb.Text && login_tb.Text == item.Login)
+                        if (NewtmpPassword == password_tb.Text && email_tb.Text == item.Email)
                         {
                             checkedUser.Username = item.Login;
                             checkedUser.Email = item.Email;
                             checkedUser.Id = item.Id;
                             checkedUser.Password = item.Password;
-                            UserWindow userWindow = new UserWindow();
+                            UserWindow_Main userWindow = new UserWindow_Main();
                             this.Close();
                             userWindow.Show();
                         }
@@ -113,12 +110,11 @@ namespace academy_project
                 }
                 if (flag == true)
                 {
-                    login_tb.Text = null;
-                    login_tb.Text = "Wrong data";
+                    email_tb.Text = null;
+                    email_tb.Text = "Wrong data";
 
                     password_tb.Text = null;
                     password_tb.Text = "Wrong data";
-
                 }
             }
         }
