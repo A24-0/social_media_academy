@@ -27,10 +27,10 @@ namespace academy_project
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Chats> Chats { get; set; }
-        public virtual DbSet<Messages> Messages { get; set; }
+        //public virtual DbSet<Chats> Chats { get; set; }
+        //public virtual DbSet<Messages> Messages { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        //public virtual DbSet<Users> Users { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

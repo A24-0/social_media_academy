@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:academy_project"
         mc:Ignorable="d"
      Title="Login" Height="300" Width="550" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
-    <Border Background="#EFEFEF" CornerRadius="20">
+    <Border Background="#C4D2EC" CornerRadius="20">
         <Grid Margin="90, 10, 10, 10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -17,11 +17,15 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" Margin="0,0,0.4,0" />
-            <Label Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="-50,10,0,10"/>
+            <Ellipse Grid.Row="0" Height="24" Width="24" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" Margin="0,0,-0.2,0" Cursor="Hand">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="x5.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Label Content="Вход" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="-50,10,0,10"/>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
-                <Label Content="Почта:" VerticalAlignment="Center" Width="70"/>
-                <TextBox x:Name="email_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
+                <Label FontWeight="Bold" Content="Логин:" VerticalAlignment="Center" Width="70"/>
+                <TextBox x:Name="login_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="8"/>
@@ -30,7 +34,17 @@
                 </TextBox>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10">
-                <Label Content="Пароль:" VerticalAlignment="Center" Width="70"/>
+                <Label FontWeight="Bold" Content="Почта:" VerticalAlignment="Center" Width="70"/>
+                <TextBox x:Name="email_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10">
+                <Label FontWeight="Bold" Content="Пароль:" VerticalAlignment="Center" Width="70"/>
                 <TextBox x:Name="password_tb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Width="250">
                     <TextBox.Resources>
                         <Style TargetType="Border">
@@ -39,7 +53,9 @@
                     </TextBox.Resources>
                 </TextBox>
             </StackPanel>
-            <Button x:Name="login_btn" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="160" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="-50,40,0,10" Click="login_btn_Click">
+            <Button x:Name="login_btn" FontWeight="Bold" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" 
+                    Width="160" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="-50,40,0,10" Click="login_btn_Click"
+                    BorderThickness="0" Background="#683142" Foreground="White">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="16"/>

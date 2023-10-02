@@ -5,27 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:academy_project"
         mc:Ignorable="d"
-        Title="User Main Window" Height="600" Width="800">
-    <Grid>
-        <Border CornerRadius="20" Background="#F0F0F0" Width="250" HorizontalAlignment="Left" Margin="20, 10, 10, 10">
-            <StackPanel>
-                <Border CornerRadius="50" Background="Green" Height="100" Width="100" HorizontalAlignment="Center">
-                    <!-- аватарка -->
-                </Border>
-                <TextBlock Text="Username" HorizontalAlignment="Center" Margin="0,10" FontSize="16"/>
-                <Button x:Name="find_friend_btn" Content="Найти друга" Margin="0,80,0,0" Background="#F0F0F0" BorderThickness="0" FontSize="24"/>
-                <Button x:Name="chats_btn" Content="Чаты"  Margin="0,30,0,0" Background="#F0F0F0" BorderThickness="0" FontSize="24"/>
-                <Button x:Name="profile_settings_btn" Content="Настройки профиля" Margin="0,30,0,0" Background="#F0F0F0" BorderThickness="0" FontSize="24"/>
-            </StackPanel>
-        </Border>
-
-        <Border CornerRadius="20" Background="White" Width="490" HorizontalAlignment="Right" Margin="20">
-            <ContentControl x:Name="contentArea">
-                <StackPanel x:Name="friendSearchPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" Visibility="Collapsed">
-                    <TextBox x:Name="friendNameTextBox" Width="150" Margin="10"/>
-                    <Button x:Name="findFriendButton" Content="Найти" Margin="5" Click="FindFriendButton_Click"/>
+        Title="User Main Window" MinHeight="606" MinWidth="804.8" AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" Width="819.2" Height="484.8" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
+    <Border CornerRadius="20" Background="#C4D2EC" BorderBrush="#C4D2EC" BorderThickness="0.3">
+        <Grid Background="#C4D2EC" Margin="10,10,9.8,37.4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Grid.Row="0" Height="24" Width="24" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" Margin="0,0,-0.2,0" Cursor="Hand">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="x5.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Border CornerRadius="120" Background="#80A5A8" Width="250" HorizontalAlignment="Left" Margin="20,10,0,10.4" BorderThickness="10" BorderBrush="#80A5A8" Grid.ColumnSpan="2">
+                <StackPanel>
+                    <Border CornerRadius="50" Height="100" Width="100" HorizontalAlignment="Center">
+                        <Border.Background>
+                            <ImageBrush Stretch="Fill" x:Name="Avatar"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="Username" HorizontalAlignment="Center" Margin="0,10" FontSize="20" FontWeight="Bold"/>
+                    <Button x:Name="find_friend_btn" FontWeight="Bold" Content="Найти друга" Margin="0,55,0,0" Background="#C4D2EC" BorderThickness="0" FontSize="24" Height="37">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="chats_btn" FontWeight="Bold" Content="Чаты"  Margin="0,30,0,0" Background="#C4D2EC" BorderThickness="0" FontSize="24" Height="37">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="profile_settings_btn" FontWeight="Bold" Content="Настройки" Margin="0,30,0,0" Background="#C4D2EC" BorderThickness="0" FontSize="24" Height="37">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
-            </ContentControl>
-        </Border>
-    </Grid>
+            </Border>
+            <Border CornerRadius="20" Background="White" Width="480" Margin="0,20,19.6,20.4" Grid.Column="1">
+                <ContentControl x:Name="contentArea" Margin="10,10,10,10.2" Grid.Column="1" Cursor="Hand">
+                    <StackPanel x:Name="friendSearchPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" Visibility="Collapsed">
+                        <TextBox x:Name="friendNameTextBox" Width="150" Margin="10"/>
+                        <Button x:Name="findFriendButton" Content="Найти" Margin="5" Click="FindFriendButton_Click"/>
+                    </StackPanel>
+                </ContentControl>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

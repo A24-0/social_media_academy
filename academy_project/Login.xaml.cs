@@ -13,13 +13,31 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Sockets;
 
 namespace academy_project
 {
     public partial class Login : Window
     {
+        private const int serverPort = 1648; //порт подключения
+        private static string serverIp = (IPAddress.Loopback.ToString());
+
+        private static TcpClient server;
+        private static NetworkStream ns;
+        private static BinaryReader br;
+        private static BinaryWriter bw;
+
+        private static void Initialization_TcpClient()
+        {
+            server = new TcpClient(serverIp, Convert.ToInt32(serverPort));
+            ns = server.GetStream(); //создать заново
+            bw = new BinaryWriter(ns); //
+            br = new BinaryReader(ns); //
+        }
         public Login()
         {
+            Initialization_TcpClient();
             InitializeComponent();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -48,7 +66,7 @@ namespace academy_project
         static string DecryptString(string cipherText, string key)
         {
             byte[] keyBytes = GetKeyBytes(key);
-            byte[] cipherTextBytes = Convert.FromBase64String(cipherText); 
+            byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
 
             using (Aes aesAlg = Aes.Create())
             {
@@ -75,47 +93,57 @@ namespace academy_project
                 }
             }
         }
+
         private void login_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (email_tb.Text != null && password_tb.Text != null) 
+            if (string.IsNullOrEmpty(login_tb.Text) != false
+                && string.IsNullOrEmpty(email_tb.Text) != false
+                && string.IsNullOrEmpty(password_tb.Text) != false)
             {
-                var db = new DB_PROJECTEntities();
+                bool this_user_logged = false;//получилось войти или нет
 
-                List<Users> users = db.Users.ToList();
-
-
-                bool flag = false;
-                CheckedUser checkedUser = new CheckedUser();
-                foreach (var item in users)
+                //где-нибудь для юзера прописать что идёт процесс отправки                                                                                       ===========================
+                Task.Run(() =>
                 {
-                    string tmpPassword = item.Password;
-                    var NewtmpPassword = DecryptString(item.Password, item.Login);
-                    if (password_tb.Text != null && email_tb.Text != null) 
+                    try
                     {
-                        if (NewtmpPassword == password_tb.Text && email_tb.Text == item.Email)
+                        bw.Write(2/*mes_for_ser_about_reg*/);//сообщение серверу что мы намерены зарегаться
+
+                        bw.Write(login_tb.Text);//ввод логина с полей для пользователя                                                                                     ============================
+
+
+                        if (br.ReadBoolean())//проверка существует ли логин
                         {
-                            checkedUser.Username = item.Login;
-                            checkedUser.Email = item.Email;
-                            checkedUser.Id = item.Id;
-                            checkedUser.Password = item.Password;
-                            UserWindow_Main userWindow = new UserWindow_Main();
-                            this.Close();
-                            userWindow.Show();
+                            bw.Write(password_tb.Text);//ввод пароля с полей для пользователя                                                                                 ===========================
+
+                            this_user_logged = br.ReadBoolean();//обработка ответа
+
+                            if (!this_user_logged)
+                            {
+                                //Console.WriteLine("не правильный пароль или ошибка");
+                                //сообщение что пароль не подходит                                                                                                       ============================
+                            }
                         }
-                        else 
+                        else
                         {
-                            flag = true;
+                            //Console.WriteLine("такого логина не существует");
+                            //если существует то сервак отправляет клиенту что нужно переделать
+                            //изменение галочек типа, что надо, что не надо менять                                                                                  ===========================
                         }
                     }
-                }
-                if (flag == true)
-                {
-                    email_tb.Text = null;
-                    email_tb.Text = "Wrong data";
+                    catch (Exception ex)
+                    {
+                        this_user_logged = false;
+                    }
+                }).Wait();
 
-                    password_tb.Text = null;
-                    password_tb.Text = "Wrong data";
+                if (this_user_logged/*message == answer_registration_is_ok*/)//код "ok" - все прошло хорошо
+                {
+                    UserWindow_Main uw_mform = new UserWindow_Main(server, serverIp);
+                    this.Close();
+                    uw_mform.Show();
                 }
+
             }
         }
     }

@@ -14,16 +14,52 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Sockets;
+using System.Drawing;
+using System.Drawing.Imaging;
+//using DrawingColor = System.Drawing.Color;
+using MediaColor = System.Windows.Media.Color;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace academy_project
 {
     public partial class UserWindow_Main : Window
     {
-        private List<Chat> chats; // Закиньте сюда чаты из бд
+        private const int serverPort = 1648;
+        private static string serverIp;
 
-        public UserWindow_Main()
+        private static TcpClient server;
+        private static NetworkStream ns;
+        private static BinaryReader br;
+        private static BinaryWriter bw;
+
+        private static Dictionary<int, Chat> chats;
+        private static Dictionary<int, User> users;
+        public UserWindow_Main(TcpClient server_, string serverIp_)
         {
+            serverIp = serverIp_;
+            server = server_;
+
+            ns = server.GetStream();
+            bw = new BinaryWriter(ns);
+            br = new BinaryReader(ns);
+
+            chats = new Dictionary<int, Chat>();
+
             InitializeComponent();
+
+            //GenerateImage();
+
+            //BitmapImage bmpImage = new BitmapImage();
+            //bmpImage.BeginInit();
+            //bmpImage.UriSource = new Uri("\\bin\\Debug\\net6.0-windows\\Avatar.png", UriKind.Relative);
+            //bmpImage.EndInit();
+
+            //Avatar.ImageSource = bmpImage;
+            //Avatar.UpdateLayout();
+
             //ищем друга
             find_friend_btn.Click += (sender, e) =>
             {
@@ -65,11 +101,44 @@ namespace academy_project
                 };
             };
         }
+
+        //private void GenerateImage()
+        //{
+        //    Bitmap bmp = new Bitmap(200, 200);
+
+        //    Graphics g = Graphics.FromImage(bmp);
+
+        //    Random rnd = new Random();
+        //    DrawingColor bgColor = DrawingColor.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+        //    g.FillRectangle(new SolidBrush(bgColor), new System.Drawing.Rectangle(0, 0, 200, 200));
+
+        //    DrawingColor letterColor = DrawingColor.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+        //    Font font = new Font("Yanone Kaffeesatz", 100);
+        //    StringFormat format = new StringFormat();
+        //    format.Alignment = StringAlignment.Center;
+        //    format.LineAlignment = StringAlignment.Center;
+
+
+        //    //Здесь вставляется имя/фамилия/ник/символ на основе которого будет генериться ава, можно любой длины вставлять
+        //    string penis = NameTB.Text.ToString();
+        //    g.DrawString(penis, font, new SolidBrush(letterColor), new RectangleF(0, 0, 200, 200), format);
+
+        //    bmp.Save("Avatar.png", ImageFormat.Png);
+        //    g.Dispose();
+        //    bmp.Dispose();
+        //}
+
+        private void Window_Closing(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
         //показывает чаты
         private void ShowChatList_Click(object sender, RoutedEventArgs e)
         {
             friendSearchPanel.Visibility = Visibility.Collapsed;
-            contentArea.Content = new ChatListControl(chats, OpenChat);
+            contentArea.Content = new ChatListControl(ref server, chats);
         }
 
         //открывает определенный чат
@@ -78,6 +147,11 @@ namespace academy_project
             contentArea.Content = new ChatContentControl();
         }
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
         //ищем друга
         private async void FindFriendButton_Click(object sender, RoutedEventArgs e)
         {
@@ -87,7 +161,7 @@ namespace academy_project
             if (friendExists)
             {
                 Chat newChat = CreateChatWithFriend(friendUsername);
-                chats.Add(newChat);
+                //chats.Add(newChat);
 
                 OpenChat(newChat);
             }
@@ -109,8 +183,6 @@ namespace academy_project
             Chat newChat = new Chat(friendUsername);
 
             //добавить начальные сообщения в чат, если нужно
-            Message initialMessage = new Message("Система", $"Чат с пользователем {friendUsername} создан.");
-            newChat.Messages.Add(initialMessage);
 
             return newChat;
         }

@@ -23,14 +23,14 @@ namespace academy_project
 
             if (!string.IsNullOrWhiteSpace(messageText))
             {
-                Message newMessage = new Message("You", messageText);
+                //Message newMessage = new Message("You", messageText);
 
-                //добавить сообщение в лист или закинуть на сервак
-                //тут добавляю в лист
-                messageListView.Items.Add(newMessage);
+                ////добавить сообщение в лист или закинуть на сервак
+                ////тут добавляю в лист
+                //messageListView.Items.Add(newMessage);
 
-                messageTextBox.Text = string.Empty;
-                placeholderTextBlock.Visibility = Visibility.Visible;
+                //messageTextBox.Text = string.Empty;
+                //placeholderTextBlock.Visibility = Visibility.Visible;
             }
         }
     }

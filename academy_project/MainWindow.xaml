@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:academy_project"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="550" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
-    <Border Background="#EFEFEF" CornerRadius="20">
-        <Grid Margin="10">
+    <Border Background="#C4D2EC" CornerRadius="20">
+        <Grid Margin="10" Background="#C4D2EC">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -16,23 +16,33 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="407*"/>
+                <ColumnDefinition Width="124*"/>
             </Grid.ColumnDefinitions>
 
-            <Ellipse Fill="Red" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" MouseLeftButtonDown="Window_Closing" Margin="0,0,0.4,0"/>
+            <Ellipse Grid.Row="0" Height="24" Width="24" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Window_Closing" Grid.Column="1" Margin="0,0,-0.6,0" Cursor="Hand">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="x5.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
 
-            <Label Content="Добро пожаловать" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="0" Margin="20"/>
+            <Label Content="Добро пожаловать" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="0" Margin="119,20,118.4,20.4" Grid.ColumnSpan="2"/>
 
-            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="login_btn" Content="Войти" Height="34" Width="208" Background="#EFEFEF" Margin="20" Click="login_btn_Click">
+            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="141,0.6,17.879,0.4">
+                <Button x:Name="login_btn" FontWeight="Bold" Content="Войти" Height="34" Width="208" Background="#EFEFEF" Margin="20" Click="login_btn_Click" BorderThickness="0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#8A1616"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </Button.Resources>
                 </Button>
 
-                <Button x:Name="registration_btn" Content="Зарегистрироваться" Height="34" Width="208" Background="#EFEFEF" Click="registration_btn_Click" Margin="0,10">
+                <Button x:Name="registration_btn" FontWeight="Bold" Content="Зарегистрироваться" Height="34" Width="208" Background="#EFEFEF" Click="registration_btn_Click" Margin="0,10" BorderThickness="0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20"/>
