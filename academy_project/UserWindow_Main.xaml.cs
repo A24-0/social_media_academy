@@ -85,6 +85,7 @@ namespace academy_project
                         },
                         new TextBox
                         {
+                            //Мурад, у меня 2 полоски... я беременна.....                              Твоя Ангелина
                             Text = "Email",
                             BorderThickness = new Thickness(1),
                             Margin = new Thickness(10),
