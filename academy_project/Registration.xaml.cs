@@ -28,9 +28,9 @@ namespace academy_project
         private static string serverIp = (IPAddress.Loopback.ToString());
 
         private static TcpClient server;
-        private static NetworkStream ns;
-        private static BinaryReader br;
-        private static BinaryWriter bw;
+        private static NetworkStream ns;// ЧТО ЭТО ТАКОЕ??
+        private static BinaryReader br;// ЧТО ЭТО ТАКОЕ??
+        private static BinaryWriter bw;// ЧТО ЭТО ТАКОЕ??
 
         private static Dictionary<int, Chat> chats;
         private static Dictionary<int, User> users;
@@ -38,8 +38,8 @@ namespace academy_project
         {
             server = new TcpClient(serverIp, Convert.ToInt32(serverPort));
             ns = server.GetStream(); //
-            bw = new BinaryWriter(ns); //
-            br = new BinaryReader(ns); //
+            bw = new BinaryWriter(ns); // ЧТО ЭТО ТАКОЕ??
+            br = new BinaryReader(ns); // ЧТО ЭТО ТАКОЕ??
         }
         public Registration()
         {
@@ -122,20 +122,22 @@ namespace academy_project
                         bw.Write(email_tb.Text);//ввод почты                                                                                                   ===========================
 
                         //да свободен, нет занят
-                        //массив 0 - свободен ли логин / 1 - свободен ли имя / 2 - свободен ли почта
+                        //массив 0 - свободен ли логин / 1 - свободен ли имя / 2 - свободен ли почта /3 - надо купить яйца
                         bool[] this_free = { br.ReadBoolean(), br.ReadBoolean(), br.ReadBoolean() };
                         if ((this_free[0] && this_free[1] && this_free[2]) == true)//проверка что занято
                         {//если существует то сервак отправляет клиенту что нужно переделать
-                            bw.Write(password_tb.Text);////ввод пароля с полей для пользователя                                                                       ===========================
+                            string tits = EncryptString(password_tb.Text.ToString(), login_tb.Text.ToString());
+                            bw.Write(tits);////ввод пароля с полей для пользователя                                                                       ===========================
                             this_user_registered = br.ReadBoolean();//обработка ответа
+                            MessageBox.Show($"tits");
                         }
                         else if ((this_free[0] && this_free[1] && this_free[2]) == false)
                         {
 
-                            //изменение галочек типа, что надо, что не надо менять                                                                             ===========================
-                            //Console.WriteLine("login " + this_free[0]);
-                            //Console.WriteLine("name " + this_free[1]);
-                            //Console.WriteLine("email " + this_free[2]);
+                            //изменение галочек типа, что надо, что не надо менять    яйца 1 пачка                                                                          ===========================
+                            //Console.WriteLine("login " + this_free[0]);             молоко 2.5% 2 литра
+                            //Console.WriteLine("name " + this_free[1]);              йогурт клубнич. 5 шт
+                            //Console.WriteLine("email " + this_free[2]);             вода свят.ис лимон 2 бутылки
                         }
                     }
                     catch (Exception ex)

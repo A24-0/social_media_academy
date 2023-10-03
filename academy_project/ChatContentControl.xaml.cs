@@ -28,7 +28,7 @@ namespace academy_project
                 ////добавить сообщение в лист или закинуть на сервак
                 ////тут добавляю в лист
                 //messageListView.Items.Add(newMessage);
-
+                //на вечеринке всё вкусно
                 //messageTextBox.Text = string.Empty;
                 //placeholderTextBlock.Visibility = Visibility.Visible;
             }

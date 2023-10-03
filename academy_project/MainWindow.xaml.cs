@@ -44,5 +44,8 @@ namespace academy_project
             this.Close();
             login_form.Show();
         }
+        //Я схожу с умааааа
+        // мне мало мало мало
+        // мне мало мало мало тебяяяяяя
     }
 }

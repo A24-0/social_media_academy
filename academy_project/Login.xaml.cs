@@ -24,9 +24,9 @@ namespace academy_project
         private static string serverIp = (IPAddress.Loopback.ToString());
 
         private static TcpClient server;
-        private static NetworkStream ns;
-        private static BinaryReader br;
-        private static BinaryWriter bw;
+        private static NetworkStream ns;// ЧТО ЭТО ТАКОЕ??
+        private static BinaryReader br;// ЧТО ЭТО ТАКОЕ??
+        private static BinaryWriter bw;// ЧТО ЭТО ТАКОЕ??
 
         private static void Initialization_TcpClient()
         {
@@ -63,32 +63,33 @@ namespace academy_project
                 return truncatedBytes;
             }
         }
-        static string DecryptString(string cipherText, string key)
+        static string EncryptString(string plainText, string key)
         {
             byte[] keyBytes = GetKeyBytes(key);
-            byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
 
             using (Aes aesAlg = Aes.Create())
             {
-                // Извлекаем IV из массива байт
-                byte[] ivBytes = new byte[aesAlg.IV.Length];
-                Buffer.BlockCopy(cipherTextBytes, 0, ivBytes, 0, aesAlg.IV.Length);
-
                 aesAlg.Key = keyBytes;
-                aesAlg.IV = ivBytes;
+                aesAlg.GenerateIV();
 
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
-                using (MemoryStream msDecrypt = new MemoryStream())
+                using (MemoryStream msEncrypt = new MemoryStream())
                 {
-                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Write))
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        // Зашифрованный текст начинается после IV
-                        csDecrypt.Write(cipherTextBytes, aesAlg.IV.Length, cipherTextBytes.Length - aesAlg.IV.Length);
-                        csDecrypt.FlushFinalBlock();
+                        csEncrypt.Write(plainTextBytes, 0, plainTextBytes.Length);
+                        csEncrypt.FlushFinalBlock();
 
-                        byte[] decryptedBytes = msDecrypt.ToArray();
-                        return Encoding.UTF8.GetString(decryptedBytes);
+                        byte[] encryptedBytes = msEncrypt.ToArray();
+
+                        // Объединяем IV и зашифрованный текст в один массив байт
+                        byte[] resultBytes = new byte[aesAlg.IV.Length + encryptedBytes.Length];
+                        Buffer.BlockCopy(aesAlg.IV, 0, resultBytes, 0, aesAlg.IV.Length);
+                        Buffer.BlockCopy(encryptedBytes, 0, resultBytes, aesAlg.IV.Length, encryptedBytes.Length);
+
+                        return Convert.ToBase64String(resultBytes);
                     }
                 }
             }
@@ -114,7 +115,9 @@ namespace academy_project
 
                         if (br.ReadBoolean())//проверка существует ли логин
                         {
-                            bw.Write(password_tb.Text);//ввод пароля с полей для пользователя                                                                                 ===========================
+                            string Murad_Rezvan = EncryptString(password_tb.Text.ToString(),login_tb.Text.ToString());
+
+                            bw.Write(Murad_Rezvan);//ввод пароля с полей для пользователя                                                                                 ===========================
 
                             this_user_logged = br.ReadBoolean();//обработка ответа
 
